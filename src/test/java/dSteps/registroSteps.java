@@ -36,7 +36,7 @@ public class registroSteps {
 
 	@Then("^El deberia poder confirmar el registro iniciando sesion$")
 	public void elDeberiaPoderConfirmarElRegistroIniciandoSesion() {
-
+		//Nueva rama
 	}
 
 }
