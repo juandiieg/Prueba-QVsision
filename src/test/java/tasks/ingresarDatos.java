@@ -67,9 +67,7 @@ public class ingresarDatos implements Task {
 
 	public static ingresarDatos llenarFormulario(String nombre, String apellido, String correo, String mes, String dia,
 			String anio, String idioma, String ciudad, String postal, String pais) {
-//		return new ingresarDatos();
 
-//		return intrumented(ingresarDatos.class);
 		return Instrumented.instanceOf(ingresarDatos.class).withProperties(nombre, apellido, correo, mes, dia, anio,
 				idioma, ciudad, postal, pais);
 	}
