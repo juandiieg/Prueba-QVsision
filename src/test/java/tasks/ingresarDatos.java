@@ -1,6 +1,7 @@
 package tasks;
 
 import net.serenitybdd.screenplay.actions.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import net.serenitybdd.core.steps.Instrumented;
@@ -40,13 +41,13 @@ public class ingresarDatos implements Task {
 
 	public <T extends Actor> void performAs(T actor) {
 		actor.attemptsTo(
-				Enter.theValue(nombre).into(RegisterObjects.INP_FIRSTNAME),
-				Enter.theValue(apellido).into(RegisterObjects.INP_LASTNAME),
-				Enter.theValue(correo).into(RegisterObjects.INP_EMAIL),
-				SelectFromOptions.byVisibleText(mes).from(RegisterObjects.SLC_MONTH),
-				SelectFromOptions.byVisibleText(dia).from(RegisterObjects.SLC_DAY),
-				SelectFromOptions.byVisibleText(anio).from(RegisterObjects.SLC_YEAR),
-				Enter.theValue(idioma).into(RegisterObjects.INP_LANGUAGE).thenHit(Keys.ENTER),
+				Enter.theValue(nombre).into(RegisterObjects.INP_FIRSTNAME),//Diligencia el nombre
+				Enter.theValue(apellido).into(RegisterObjects.INP_LASTNAME),//Diligencia el apellido
+				Enter.theValue(correo).into(RegisterObjects.INP_EMAIL),//Diligencia email
+				SelectFromOptions.byVisibleText(mes).from(RegisterObjects.SLC_MONTH),//Selecciona el mes de nacimiento
+				SelectFromOptions.byVisibleText(dia).from(RegisterObjects.SLC_DAY),//Selecciona el día de nacimiento
+				SelectFromOptions.byVisibleText(anio).from(RegisterObjects.SLC_YEAR),//Selecciona el año de nacimiento
+				Enter.theValue(idioma).into(RegisterObjects.INP_LANGUAGE).thenHit(Keys.ENTER)//DIligencia idiomas
 				Click.on(RegisterObjects.BTN_NEXT),
 				Clear.field(RegisterObjects.INP_CITY),
 				Enter.theValue(ciudad).into(RegisterObjects.INP_CITY),
@@ -54,8 +55,9 @@ public class ingresarDatos implements Task {
 				Hit.the(Keys.ENTER).into(RegisterObjects.INP_CITY),
 				Clear.field(RegisterObjects.INP_ZIP),
 				Enter.theValue(postal).into(RegisterObjects.INP_ZIP),
-//				Click.on(RegisterObjects.SLC_COUNTRY),
-				Hit.the(Keys.NUMPAD7).into(RegisterObjects.SLC_COUNTRY)
+				Click.on(RegisterObjects.SLC_COUNTRY),
+				Click.on(By.xpath("//div[contains(text(),'"+ pais +"')]")),
+				Click.on(RegisterObjects.BTN_NEXT2)
 				);
 		try {
 			Thread.sleep(5000);
@@ -67,9 +69,7 @@ public class ingresarDatos implements Task {
 
 	public static ingresarDatos llenarFormulario(String nombre, String apellido, String correo, String mes, String dia,
 			String anio, String idioma, String ciudad, String postal, String pais) {
-//		return new ingresarDatos();
 
-//		return intrumented(ingresarDatos.class);
 		return Instrumented.instanceOf(ingresarDatos.class).withProperties(nombre, apellido, correo, mes, dia, anio,
 				idioma, ciudad, postal, pais);
 	}
