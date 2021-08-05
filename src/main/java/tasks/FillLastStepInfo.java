@@ -20,21 +20,6 @@ public class FillLastStepInfo implements Task {
     public FillLastStepInfo() {
         this.password = generateRandomSecurePass();
     }
-
-    /* ESTE ES EL FEO
-    private String generateRandomSecurePass() {
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        SecureRandom random = new SecureRandom();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            int randomIndex = random.nextInt(chars.length());
-            stringBuilder.append(chars.charAt(randomIndex));
-        }
-        return stringBuilder.toString();
-    }
-
-     */
-
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
