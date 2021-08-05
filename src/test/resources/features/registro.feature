@@ -6,8 +6,8 @@ Feature: Crear un nuevo usuario
 	@ScenarioPruebaRegistro
 	Scenario: Registrar un nuevo usuario
 		Given Que un nuevo usuario accede a la web de utest para registrarse
-		When El ingresa sus datos personales Diego, Gomez, juan7732@correo.es, May, 16, 1997, spanish al formulario
+		When El ingresa sus datos personales Diego, Gomez, juanvc7732@correo.es, May, 16, 1997, spanish al formulario
 		And El ingresa sus datos de residencia Cali, 110851, Ecuador al formulario
 		And El ingresa la información de los dispositivos Linux, Ubuntu, Bulgarian y Wiko, Y61, Android 10
 		And El crea una contraseña y acepta los términos y condiciones
-		Then el puede iniciar sesión con el usuario creado
+	#	Then El verifica su registro con el mensaje de bienvenida

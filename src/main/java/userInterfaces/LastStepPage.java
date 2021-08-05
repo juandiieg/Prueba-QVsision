@@ -3,7 +3,7 @@ package userInterfaces;
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;
 
-public class LastStepPage {
+public class LastStepPage{
 
     public static final Target INP_PASS = Target.the("Password Input").located(By.id("password"));
     public static final Target INP_CONFIRM_PASS = Target.the("Confirm password Input").located(By.id("confirmPassword"));
