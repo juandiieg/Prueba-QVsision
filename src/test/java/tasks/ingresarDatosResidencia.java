@@ -7,6 +7,10 @@ import net.serenitybdd.screenplay.actions.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.GivenWhenThen.then;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
+import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 import static userInterface.RegisterStep2.*;
 
 public class ingresarDatosResidencia implements Task {
@@ -30,16 +34,17 @@ public class ingresarDatosResidencia implements Task {
                 Clear.field(INP_ZIP),
                 Enter.theValue(postal).into(INP_ZIP),
                 Click.on(SLC_COUNTRY),
-                Click.on(By.xpath("//div[contains(text(),'"+ pais +"')]")),
+                Click.on(By.xpath("//div[contains(text(),'"+ pais +"')]"))
 //				Click.on(SLC_COUNTRY2.of(pais)),
+        );
+        actor.should(
+                seeThat(the(INP_CITY), hasValue(ciudad)),
+                seeThat(the(INP_ZIP), hasValue(postal)),
+                seeThat(the(By.xpath("//span[contains(text(),'"+ pais +"')]")), containsText(pais))
+        );
+        actor.attemptsTo(
                 Click.on(BTN_NEXT2)
         );
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     public static ingresarDatosResidencia DiligenciarFormulario(String ciudad, String postal, String pais) {
