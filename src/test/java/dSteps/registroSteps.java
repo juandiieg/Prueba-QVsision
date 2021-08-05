@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
 import tasks.FillBasicInfo;
 import tasks.FillDevicesInfo;
+import tasks.FillLastStepInfo;
 import tasks.FillLocationInfo;
 import userInterfaces.HomePage;
 
@@ -52,6 +53,13 @@ public class registroSteps {
 														String mobile, String model, String os) {
 		actor.wasAbleTo(
 				FillDevicesInfo.fillInfo(computer, version, language, mobile, model, os)
+		);
+	}
+
+	@And("^El crea una contraseña y acepta los términos y condiciones$")
+	public void elCreaUnaContraseñaYAceptaLosTérminosYCondiciones() {
+		actor.wasAbleTo(
+				FillLastStepInfo.createPassAndAcceptTerms()
 		);
 	}
 
