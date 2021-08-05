@@ -26,9 +26,9 @@ public class FillLastStepInfo implements Task {
                 Enter.theValue(password).into(INP_PASS),
                 Enter.theValue(password).into(INP_CONFIRM_PASS),
                 Click.on(CHK_STAY_INFO),
-                //Click.on(CHK_TERMS),
-                //Click.on(CHK_POLICY),
-                Click.on(BTN_SETUP)
+                Click.on(CHK_TERMS),
+                Click.on(CHK_POLICY)
+//                Click.on(BTN_SETUP)
         );
 
         try {
