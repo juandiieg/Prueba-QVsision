@@ -9,16 +9,21 @@ import net.serenitybdd.screenplay.actions.Hit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.containsText;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.hasValue;
+import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
+
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userInterfaces.LocationPage.*;
 
-public class LocationInfo implements Task {
+public class FillLocationInfo implements Task {
 
     private String city;
     private String postal;
     private String country;
 
-    public LocationInfo(String city, String postal, String country) {
+    public FillLocationInfo(String city, String postal, String country) {
         this.city = city;
         this.postal = postal;
         this.country = country;
@@ -33,12 +38,19 @@ public class LocationInfo implements Task {
                 Clear.field(INP_ZIP),
                 Enter.theValue(postal).into(INP_ZIP),
                 Click.on(SLC_COUNTRY),
-                Click.on(By.xpath("//div[contains(text(),'" + country + "')]")),
+                Click.on(By.xpath("//div[contains(text(),'"+ country +"')]"))
+        );
+        actor.should(
+                seeThat(the(INP_CITY), hasValue(city)),
+                seeThat(the(INP_ZIP), hasValue(postal)),
+                seeThat(the(By.xpath("//span[contains(text(),'"+ country +"')]")), containsText(country))
+        );
+        actor.attemptsTo(
                 Click.on(BTN_DEVICES)
         );
     }
 
-    public static LocationInfo fillLocationInfo(String city, String postal, String country) {
-        return instrumented(LocationInfo.class, city, postal, country);
+    public static FillLocationInfo fillLocationInfo(String city, String postal, String country) {
+        return instrumented(FillLocationInfo.class, city, postal, country);
     }
 }

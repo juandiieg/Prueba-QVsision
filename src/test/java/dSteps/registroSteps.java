@@ -10,9 +10,9 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
-import tasks.BasicInfo;
-import tasks.DevicesInfo;
-import tasks.LocationInfo;
+import tasks.FillBasicInfo;
+import tasks.FillDevicesInfo;
+import tasks.FillLocationInfo;
 import userInterfaces.HomePage;
 
 import static userInterfaces.HomePage.BTN_BECOME;
@@ -36,14 +36,14 @@ public class registroSteps {
 	public void elIngresaSusDatosPersonales(String name, String lastname, String email, String month,
 											String day, String year, String language) {
 		actor.wasAbleTo(
-				BasicInfo.fillBasicInfo(name, lastname, email, month, day, year, language)
+				FillBasicInfo.fillInfo(name, lastname, email, month, day, year, language)
 		);
 	}
 
 	@And("^El ingresa sus datos de residencia (.*), (.*), (.*) al formulario$")
 	public void elIngresaSusDatosDeResidencia(String city, String postal, String country) {
 		actor.wasAbleTo(
-				LocationInfo.fillLocationInfo(city, postal, country)
+				FillLocationInfo.fillLocationInfo(city, postal, country)
 		);
 	}
 
@@ -51,7 +51,7 @@ public class registroSteps {
 	public void elIngresaLaInformaciónDeLosDispositivos(String computer, String version, String language,
 														String mobile, String model, String os) {
 		actor.wasAbleTo(
-				DevicesInfo.fillDevicesInfo(computer, version, language, mobile, model, os)
+				FillDevicesInfo.fillInfo(computer, version, language, mobile, model, os)
 		);
 	}
 

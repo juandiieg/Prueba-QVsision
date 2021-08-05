@@ -3,14 +3,12 @@ package tasks;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Hit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userInterfaces.DevicesPage.*;
 
-public class DevicesInfo implements Task {
+public class FillDevicesInfo implements Task {
 
     private String computer;
     private String version;
@@ -19,7 +17,7 @@ public class DevicesInfo implements Task {
     private String model;
     private String os;
 
-    public DevicesInfo(String computer, String version, String language, String mobile, String model, String os) {
+    public FillDevicesInfo(String computer, String version, String language, String mobile, String model, String os) {
         this.computer = computer;
         this.version = version;
         this.language = language;
@@ -48,7 +46,7 @@ public class DevicesInfo implements Task {
         );
     }
 
-    public static DevicesInfo fillDevicesInfo(String computer, String version, String language, String mobile, String model, String os) {
-        return instrumented(DevicesInfo.class, computer, version, language, mobile, model, os);
+    public static FillDevicesInfo fillInfo(String computer, String version, String language, String mobile, String model, String os) {
+        return instrumented(FillDevicesInfo.class, computer, version, language, mobile, model, os);
     }
 }
