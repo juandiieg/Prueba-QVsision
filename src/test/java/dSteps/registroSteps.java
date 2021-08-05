@@ -1,42 +1,62 @@
 package dSteps;
 
-import org.openqa.selenium.WebDriver;
-
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Open;
 import net.thucydides.core.annotations.Managed;
-import tasks.ingresarDatos;
-//import userInterface.HomePage;
-//import tasks.ingresarDatos;
+import org.openqa.selenium.WebDriver;
+import tasks.BasicInfo;
+import tasks.DevicesInfo;
+import tasks.LocationInfo;
+import userInterfaces.HomePage;
+
+import static userInterfaces.HomePage.BTN_BECOME;
 
 public class registroSteps {
 
 	@Managed(driver = "chrome")
 	private WebDriver browser;
 	private Actor actor = Actor.named("Diego");
-//	private HomePage homePage = new HomePage();
+	private HomePage homePage = new HomePage();
 
-	@Given("^Que un nuevo usuario ingresa a la web en el modulo de registro$")
-	public void queUnNuevoUsuarioIngresaALaWebEnElModuloDeRegistro() {
+	@Given("^Que un nuevo usuario accede a la web de utest para registrarse$")
+	public void queUnNuevoUsuarioAccedeLaWebDeUtest() {
 		actor.can(BrowseTheWeb.with(browser));
 		browser.manage().window().maximize();
-		actor.wasAbleTo(Open.url("https://utest.com/signup/personal"));
+		actor.wasAbleTo(Open.browserOn(homePage));
+		actor.wasAbleTo(Click.on(BTN_BECOME));
 	}
 
-	@When("^El ingresa sus datos personales(.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) al formulario$")
-	public void elIngresaSusDatosPersonales(String nombre, String apellido, String correo, String mes, String dia,
-			String anio, String idioma, String ciudad, String postal, String pais) {
-		actor.wasAbleTo(ingresarDatos.llenarFormulario(nombre, apellido, correo, mes, dia, anio, idioma, ciudad, postal, pais));
-
+	@When("^El ingresa sus datos personales(.*), (.*), (.*), (.*), (.*), (.*), (.*) al formulario$")
+	public void elIngresaSusDatosPersonales(String name, String lastname, String email, String month,
+											String day, String year, String language) {
+		actor.wasAbleTo(
+				BasicInfo.fillBasicInfo(name, lastname, email, month, day, year, language)
+		);
 	}
 
-	@Then("^El deberia poder confirmar el registro iniciando sesion$")
-	public void elDeberiaPoderConfirmarElRegistroIniciandoSesion() {
+	@And("^El ingresa sus datos de residencia (.*), (.*), (.*) al formulario$")
+	public void elIngresaSusDatosDeResidencia(String city, String postal, String country) {
+		actor.wasAbleTo(
+				LocationInfo.fillLocationInfo(city, postal, country)
+		);
+	}
 
+	@And("^El ingresa la información de los dispositivos (.*), (.*), (.*) y (.*), (.*), (.*)$")
+	public void elIngresaLaInformaciónDeLosDispositivos(String computer, String version, String language,
+														String mobile, String model, String os) {
+		actor.wasAbleTo(
+				DevicesInfo.fillDevicesInfo(computer, version, language, mobile, model, os)
+		);
+	}
+
+	@Then("^el puede iniciar sesión con el usuario creado$")
+	public void elPuedeIniciarSesionConElUsuarioCreado() {
 	}
 
 }
